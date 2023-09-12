@@ -46,27 +46,21 @@ const AddComment = props => {
           elementId: props.selected,
           rate: 1,
         });
-
         const newComment = await response.json();
-
         setHasAlert(true);
         setAlert({
           message: "comment - " + newComment.comment + " - added!",
-          status: response.status,
           variant: "success",
         });
-
         setTimeout(() => setHasAlert(false), 2000);
       } else {
         setHasAlert(true);
-        setAlert({ message: "Error data", status: response.status, variant: "danger" });
-
+        setAlert({ message: "Error data", status: "satus: " + response.status, variant: "danger" });
         setTimeout(() => setHasAlert(false), 2000);
       }
     } catch (error) {
       console.log(error);
     }
-
     setTimeout(() => handleClose(), 2000);
     setTimeout(() => props.update(), 2000);
   };
@@ -86,7 +80,7 @@ const AddComment = props => {
         <Modal.Body>
           {hasAlert && (
             <Alert variant={alert.variant}>
-              {alert.message}, status code: {alert.status}
+              {alert.message}, {alert.status}
             </Alert>
           )}
           <Form id="addComment">
