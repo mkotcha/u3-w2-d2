@@ -2,17 +2,6 @@ import { useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 
 const AddComment = props => {
-  // state = {
-  //   hasAlert: false,
-  //   alert: { message: "", status: "", variant: "" },
-  //   modalShow: false,
-  //   comment: {
-  //     comment: "",
-  //     elementId: "",
-  //     rate: 1,
-  //   },
-  // };
-
   const [hasAlert, setHasAlert] = useState(false);
   const [alert, setAlert] = useState({ message: "", status: "", variant: "" });
   const [modalShow, setModalShow] = useState(false);
@@ -25,7 +14,6 @@ const AddComment = props => {
   useEffect(props.update, [modalShow]);
 
   useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
-  useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), []);
 
   const handleClose = () => {
     setModalShow(false);
@@ -64,8 +52,6 @@ const AddComment = props => {
         });
 
         const newComment = await response.json();
-        // this.props.mod(newComment._id);
-        // this.props.update();
 
         setHasAlert(true);
         setAlert({
@@ -87,16 +73,6 @@ const AddComment = props => {
 
     setTimeout(() => handleClose(), 2000);
   };
-
-  // componentDidUpdate = pervProps => {
-  //   if (pervProps.selected !== this.props.selected) {
-  //     this.setState({ comment: { ...this.state.comment, elementId: this.props.selected } });
-  //   }
-  // };
-
-  // componentDidMount = () => {
-  //   this.setState({ comment: { ...this.state.comment, elementId: this.props.selected } });
-  // };
 
   return (
     <>
