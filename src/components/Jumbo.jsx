@@ -1,9 +1,5 @@
 import { Container, Dropdown } from "react-bootstrap";
 
-const setCategory = (event, fetch, category) => {
-  fetch(category);
-};
-
 const Jumbo = props => {
   return (
     <Container>
@@ -21,22 +17,22 @@ const Jumbo = props => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1" onClick={event => setCategory(event, props.fakeFetch, "fantasy")}>
+              <Dropdown.Item href="#/action-1" onClick={() => props.setCategory("fantasy")}>
                 fantasy
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-2" onClick={event => setCategory(event, props.fakeFetch, "history")}>
+              <Dropdown.Item href="#/action-2" onClick={() => props.setCategory("history")}>
                 history
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick={event => setCategory(event, props.fakeFetch, "horror")}>
+              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("horror")}>
                 horror
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick={event => setCategory(event, props.fakeFetch, "romance")}>
+              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("romance")}>
                 romance
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick={event => setCategory(event, props.fakeFetch, "scifi")}>
+              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("scifi")}>
                 scifi
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick={event => setCategory(event, props.fakeFetch, "all")}>
+              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("all")}>
                 all
               </Dropdown.Item>
             </Dropdown.Menu>

@@ -18,14 +18,14 @@ const MyNav = props => {
             <Nav.Link href="#">About</Nav.Link>
             <Nav.Link href="#">Browse</Nav.Link>
           </Nav>
-          <Form className="d-flex" onSubmit={event => setCategory(event, props.fakeSearch)}>
+          <Form className="d-flex" onSubmit={event => props.setSearchFilter(event.target.filter.value)}>
             <Form.Control
               id="filter"
               type="search"
               className="me-2"
               aria-label="Search"
               placeholder="Scrivi un titolo..."
-              onChange={event => setCategory(event, props.fakeSearch)}
+              onChange={event => props.setSearchFilter(event.target.value)}
             />
             <Button variant="outline-success" type="submit">
               Search
