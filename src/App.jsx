@@ -22,7 +22,7 @@ function App() {
             <BookList searchFilter={searchFilter} category={category} selected={selected} setSelected={setSelected} />
           </Col>
           <Col sm="3">
-            <div className="sticky-top vh-100 overflow-y-scroll">
+            <div className="sticky-top vh-100 overflow-y-auto">
               {selected ? <CommentArea selected={selected} /> : <h5>Select a book to view comments</h5>}
             </div>
           </Col>
