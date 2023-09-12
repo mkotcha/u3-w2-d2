@@ -10,13 +10,12 @@ import CommentArea from "./CommentArea";
 import { useEffect, useState } from "react";
 
 const BookList = props => {
-  const [category, setCategory] = useState("");
   const [selected, setSelected] = useState("");
   const [books, setBooks] = useState([]);
 
   const setBooksArr = async () => {
     let booksArr = [];
-    switch (category) {
+    switch (props.category) {
       case "fantasy":
         booksArr = fantasy;
         break;
@@ -48,13 +47,9 @@ const BookList = props => {
   };
 
   useEffect(() => {
-    setCategory("horror");
-  }, []);
-
-  useEffect(() => {
     setBooksArr();
     setSelected("");
-  }, [category]);
+  }, [props.category]);
 
   useEffect(() => {
     setBooksArr();
@@ -62,7 +57,6 @@ const BookList = props => {
 
   return (
     <>
-      <Jumbo setCategory={setCategory} />
       <Container>
         <Row>
           <Col>

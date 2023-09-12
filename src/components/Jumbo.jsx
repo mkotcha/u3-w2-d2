@@ -12,8 +12,8 @@ const Jumbo = props => {
           </p>
 
           <Dropdown>
-            <Dropdown.Toggle variant="primary" size="lg" id="dropdown-basic">
-              category
+            <Dropdown.Toggle variant="primary" size="lg" id="dropdown-basic" className="w-25">
+              {props.category ? props.category : "Select a category"}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
@@ -32,7 +32,7 @@ const Jumbo = props => {
               <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("scifi")}>
                 scifi
               </Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("all")}>
+              <Dropdown.Item href="#/action-3" onClick={() => props.setCategory("")}>
                 all
               </Dropdown.Item>
             </Dropdown.Menu>
