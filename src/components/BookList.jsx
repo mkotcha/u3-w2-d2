@@ -1,5 +1,4 @@
 import Jumbo from "./Jumbo";
-import MyNav from "./MyNav";
 import fantasy from "../data/fantasy.json";
 import history from "../data/history.json";
 import horror from "../data/horror.json";
@@ -12,46 +11,36 @@ import { useEffect, useState } from "react";
 
 const BookList = props => {
   const [category, setCategory] = useState("");
-  const [filter, setFilter] = useState("");
   const [selected, setSelected] = useState("");
   const [books, setBooks] = useState([]);
 
-  // const fakeFetch = category => {
-  //   setCategory(category);
-  // };
-
   const setBooksArr = async () => {
-    let categoryArr = [];
+    let booksArr = [];
     switch (category) {
       case "fantasy":
-        categoryArr = fantasy;
+        booksArr = fantasy;
         break;
       case "history":
-        categoryArr = history;
+        booksArr = history;
         break;
       case "horror":
-        categoryArr = horror;
+        booksArr = horror;
         break;
       case "romance":
-        categoryArr = romance;
+        booksArr = romance;
         break;
       case "scifi":
-        categoryArr = scifi;
+        booksArr = scifi;
         break;
 
       default:
-        categoryArr = [...fantasy, ...history, ...horror, ...romance, ...scifi];
+        booksArr = [...fantasy, ...history, ...horror, ...romance, ...scifi];
         break;
     }
 
-    categoryArr = categoryArr.filter(elm => elm.title.toLowerCase().includes(filter.toLowerCase()) >= 1);
+    booksArr = booksArr.filter(elm => elm.title.toLowerCase().includes(props.searchFilter.toLowerCase()) >= 1);
 
-    setBooks(categoryArr);
-  };
-
-  const setSearchFilter = searchFilter => {
-    setFilter(searchFilter);
-    // setBooks();
+    setBooks(booksArr);
   };
 
   const selectBook = id => {
@@ -69,11 +58,10 @@ const BookList = props => {
 
   useEffect(() => {
     setBooksArr();
-  }, [filter]);
+  }, [props.searchFilter]);
 
   return (
     <>
-      <MyNav setSearchFilter={setSearchFilter} />
       <Jumbo setCategory={setCategory} />
       <Container>
         <Row>

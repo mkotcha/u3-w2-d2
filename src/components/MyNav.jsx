@@ -1,11 +1,5 @@
 import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
 
-const setCategory = (event, fetch) => {
-  event.preventDefault();
-  if (event.type === "change") fetch(event.target.value);
-  else fetch(event.target.filter.value);
-};
-
 const MyNav = props => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
