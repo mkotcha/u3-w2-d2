@@ -13,6 +13,7 @@ const AddComment = props => {
 
   const handleClose = () => {
     setModalShow(false);
+    props.update();
   };
 
   const handleShow = () => {
@@ -26,9 +27,8 @@ const AddComment = props => {
   const handleSubmit = async event => {
     event.preventDefault();
     const url = "https://striveschool-api.herokuapp.com/api/comments/";
-    let options = {};
 
-    options = {
+    const options = {
       method: "POST",
       body: JSON.stringify(commentObj),
       headers: {
@@ -48,7 +48,6 @@ const AddComment = props => {
         });
 
         const newComment = await response.json();
-        props.update();
 
         setHasAlert(true);
         setAlert({
