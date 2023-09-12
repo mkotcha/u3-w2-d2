@@ -8,7 +8,7 @@ const CommentArea = props => {
   const [comments, setComments] = useState([]);
 
   const fetchComments = async () => {
-    const url = "https://striveschool-api.herokuapp.com/api/comments/";
+    const url = "https://striveschool-api.herokuapp.com/api/books/" + props.selected + "/comments/";
     const options = {
       headers: {
         Authorization:
@@ -20,7 +20,8 @@ const CommentArea = props => {
     try {
       const response = await fetch(url, options);
       if (response.ok) {
-        const data = await response.json().then(resp => resp.filter(elm => elm.elementId === props.selected));
+        // const data = await response.json().then(resp => resp.filter(elm => elm.elementId === props.selected));
+        const data = await response.json();
         setComments(data);
       } else {
         setHasError(true);
