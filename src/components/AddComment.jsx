@@ -46,6 +46,7 @@ const AddComment = props => {
           elementId: props.selected,
           rate: 1,
         });
+        setTimeout(() => props.update(), 2000);
         const newComment = await response.json();
         setHasAlert(true);
         setAlert({
@@ -62,7 +63,6 @@ const AddComment = props => {
       console.log(error);
     }
     setTimeout(() => handleClose(), 2000);
-    setTimeout(() => props.update(), 2000);
   };
 
   useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
