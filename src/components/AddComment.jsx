@@ -13,7 +13,7 @@ const AddComment = props => {
 
   const handleClose = () => {
     setModalShow(false);
-    props.update();
+    // props.update();
   };
 
   const handleShow = () => {
@@ -68,6 +68,7 @@ const AddComment = props => {
     }
 
     setTimeout(() => handleClose(), 2000);
+    setTimeout(() => props.update(), 2000);
   };
 
   useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
