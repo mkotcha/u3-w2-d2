@@ -1,19 +1,13 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import CommentList from "./CommentList";
 import { Spinner } from "react-bootstrap";
 
-class CommentArea extends Component {
-  state = {
-    isLoading: true,
-    hasError: false,
-    comments: [],
-  };
+const CommentArea = props => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [comments, setComments] = useState([]);
 
-  update = () => {
-    this.fetchComments();
-  };
-
-  fetchComments = async () => {
+  const fetchComments = async () => {
     const url = "https://striveschool-api.herokuapp.com/api/comments/";
     const options = {
       headers: {
@@ -22,42 +16,44 @@ class CommentArea extends Component {
       },
     };
 
-    this.setState({ isLoading: true });
+    setIsLoading(true);
     try {
       const response = await fetch(url, options);
       if (response.ok) {
-        const data = await response.json().then(resp => resp.filter(elm => elm.elementId === this.props.selected));
-        this.setState({ comments: data });
+        const data = await response.json().then(resp => resp.filter(elm => elm.elementId === props.selected));
+        setComments(data);
       } else {
-        this.setState({ hasError: true });
+        setHasError(true);
       }
     } catch (error) {
       console.log(error);
     } finally {
-      this.setState({ isLoading: false });
+      setIsLoading(false);
     }
   };
 
-  componentDidMount = () => {
-    this.fetchComments();
+  const update = () => {
+    fetchComments();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.selected !== this.props.selected) this.fetchComments();
-  };
+  useEffect(() => {
+    fetchComments();
+  }, [props.selected]);
 
-  render() {
-    return (
-      <>
-        <div>
-          {this.state.comments.length === 0 && <h5>There are no comments yet...</h5>}
-          {this.state.isLoading && <Spinner animation="border" variant="warning" />}
-          <CommentList comments={this.state.comments} selected={this.props.selected} update={this.update} />
-        </div>
-        <div className="flex-grow-1"></div>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <div>
+        {comments.length === 0 && <h5>There are no comments yet...</h5>}
+        {hasError && <p>error!</p>}
+        {isLoading ? (
+          <Spinner animation="border" variant="warning" />
+        ) : (
+          <CommentList comments={comments} selected={props.selected} update={update} />
+        )}
+      </div>
+      <div className="flex-grow-1"></div>
+    </>
+  );
+};
 
 export default CommentArea;

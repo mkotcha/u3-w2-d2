@@ -11,7 +11,7 @@ const AddComment = props => {
     rate: 1,
   });
 
-  useEffect(props.update, [modalShow]);
+  // useEffect(props.update, [modalShow]);
 
   useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
 
@@ -52,6 +52,7 @@ const AddComment = props => {
         });
 
         const newComment = await response.json();
+        props.update();
 
         setHasAlert(true);
         setAlert({
