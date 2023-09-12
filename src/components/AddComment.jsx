@@ -53,16 +53,16 @@ const AddComment = props => {
           message: "comment - " + newComment.comment + " - added!",
           variant: "success",
         });
-        setTimeout(() => setHasAlert(false), 2000);
+        setTimeout(() => setHasAlert(false), 1500);
       } else {
         setHasAlert(true);
         setAlert({ message: "Error data", status: "satus: " + response.status, variant: "danger" });
-        setTimeout(() => setHasAlert(false), 2000);
+        setTimeout(() => setHasAlert(false), 1500);
       }
     } catch (error) {
       console.log(error);
     }
-    setTimeout(() => handleClose(), 2000);
+    setTimeout(() => handleClose(), 1800);
   };
 
   useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
