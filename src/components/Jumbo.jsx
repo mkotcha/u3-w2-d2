@@ -12,7 +12,7 @@ const Jumbo = props => {
           </p>
 
           <Dropdown>
-            <Dropdown.Toggle variant="primary" size="lg" id="dropdown-basic" className="w-25">
+            <Dropdown.Toggle variant="primary" size="lg" id="dropdown-basic">
               {props.category ? props.category : "Select a category"}
             </Dropdown.Toggle>
 
