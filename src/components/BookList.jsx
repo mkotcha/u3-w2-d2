@@ -1,16 +1,13 @@
-import Jumbo from "./Jumbo";
 import fantasy from "../data/fantasy.json";
 import history from "../data/history.json";
 import horror from "../data/horror.json";
 import romance from "../data/romance.json";
 import scifi from "../data/scifi.json";
-import { Col, Container, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
-import CommentArea from "./CommentArea";
 import { useEffect, useState } from "react";
 
 const BookList = props => {
-  const [selected, setSelected] = useState("");
   const [books, setBooks] = useState([]);
 
   const setBooksArr = async () => {
@@ -42,13 +39,9 @@ const BookList = props => {
     setBooks(booksArr);
   };
 
-  const selectBook = id => {
-    setSelected(id);
-  };
-
   useEffect(() => {
     setBooksArr();
-    setSelected("");
+    props.setSelected("");
   }, [props.category]);
 
   useEffect(() => {
@@ -57,28 +50,17 @@ const BookList = props => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
-            <Row xs={1} md={2} lg={3} xl={4} xxl={5} className="g-4">
-              {books.map((book, index) => (
-                <SingleBook
-                  book={book}
-                  key={book.asin + index}
-                  id={book.asin}
-                  select={selectBook}
-                  selected={selected}
-                />
-              ))}
-            </Row>
-          </Col>
-          <Col sm="3">
-            <div className="sticky-top vh-100 overflow-y-scroll">
-              {selected ? <CommentArea selected={selected} /> : <h5>Select a book to view comments</h5>}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+      <Row xs={1} md={2} lg={3} xl={4} xxl={5} className="g-4">
+        {books.map((book, index) => (
+          <SingleBook
+            book={book}
+            key={book.asin + index}
+            id={book.asin}
+            setSelected={props.setSelected}
+            selected={props.selected}
+          />
+        ))}
+      </Row>
     </>
   );
 };

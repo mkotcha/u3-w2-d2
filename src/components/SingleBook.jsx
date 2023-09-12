@@ -4,7 +4,7 @@ const SingleBook = props => {
   return (
     <Col>
       <Card className="h-100" border={props.selected === props.book.asin ? "danger" : ""}>
-        <Card.Img variant="top" src={props.book.img} onClick={() => props.select(props.book.asin)} />
+        <Card.Img variant="top" src={props.book.img} onClick={() => props.setSelected(props.book.asin)} />
         <Card.Body className="d-flex flex-column">
           <Card.Title className="mb-auto">{props.book.title}</Card.Title>
 
