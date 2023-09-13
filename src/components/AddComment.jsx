@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 
-const AddComment = props => {
+const AddComment = ({ selected, setModded }) => {
   const [hasAlert, setHasAlert] = useState(false);
   const [alert, setAlert] = useState({ message: "", status: "", variant: "" });
   const [modalShow, setModalShow] = useState(false);
@@ -43,29 +43,34 @@ const AddComment = props => {
       if (response.ok) {
         setCommentObj({
           comment: "",
-          elementId: props.selected,
+          elementId: selected,
           rate: 1,
         });
-        setTimeout(() => props.update(), 2000);
+        // setTimeout(() => update(), 2000);
+        setModded(true);
         const newComment = await response.json();
         setHasAlert(true);
         setAlert({
           message: "comment - " + newComment.comment + " - added!",
           variant: "success",
         });
-        setTimeout(() => setHasAlert(false), 1500);
+        setTimeout(() => setHasAlert(false), 1800);
       } else {
         setHasAlert(true);
         setAlert({ message: "Error data", status: "satus: " + response.status, variant: "danger" });
-        setTimeout(() => setHasAlert(false), 1500);
+        setTimeout(() => setHasAlert(false), 1800);
       }
     } catch (error) {
       console.log(error);
     }
-    setTimeout(() => handleClose(), 1800);
+    setTimeout(() => handleClose(), 1900);
   };
 
-  useEffect(() => setCommentObj({ ...commentObj, elementId: props.selected }), [props.selected]);
+  useEffect(() => {
+    if (commentObj.elementId !== selected) {
+      setCommentObj({ ...commentObj, elementId: selected });
+    }
+  }, [selected, commentObj]);
 
   return (
     <>

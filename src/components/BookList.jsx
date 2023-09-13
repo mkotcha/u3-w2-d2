@@ -7,12 +7,16 @@ import { Row } from "react-bootstrap";
 import SingleBook from "./SingleBook";
 import { useEffect, useState } from "react";
 
-const BookList = props => {
+export const BookList = ({ searchFilter, category, selected, setSelected }) => {
   const [books, setBooks] = useState([]);
 
-  const setBooksArr = async () => {
+  // useEffect(() => {
+  //   // setSelected("");
+  // }, [category, setSelected]);
+
+  useEffect(() => {
     let booksArr = [];
-    switch (props.category) {
+    switch (category) {
       case "fantasy":
         booksArr = fantasy;
         break;
@@ -28,25 +32,14 @@ const BookList = props => {
       case "scifi":
         booksArr = scifi;
         break;
-
       default:
         booksArr = [...fantasy, ...history, ...horror, ...romance, ...scifi];
         break;
     }
-
-    booksArr = booksArr.filter(elm => elm.title.toLowerCase().includes(props.searchFilter.toLowerCase()) >= 1);
-
+    booksArr = booksArr.filter(elm => elm.title.toLowerCase().includes(searchFilter.toLowerCase()) > 0);
+    if (booksArr.filter(elm => elm.asin === selected).length === 0) setSelected("");
     setBooks(booksArr);
-  };
-
-  useEffect(() => {
-    setBooksArr();
-    props.setSelected("");
-  }, [props.category]);
-
-  useEffect(() => {
-    setBooksArr();
-  }, [props.searchFilter]);
+  }, [searchFilter, category, selected, setSelected]);
 
   return (
     <>
@@ -56,8 +49,8 @@ const BookList = props => {
             book={book}
             key={book.asin + index}
             id={book.asin}
-            setSelected={props.setSelected}
-            selected={props.selected}
+            setSelected={setSelected}
+            selected={selected}
           />
         ))}
       </Row>
