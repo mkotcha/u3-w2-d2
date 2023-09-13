@@ -13,7 +13,6 @@ const AddComment = ({ selected, setModded }) => {
 
   const handleClose = () => {
     setModalShow(false);
-    // props.update();
   };
 
   const handleShow = () => {

@@ -10,10 +10,6 @@ import { useEffect, useState } from "react";
 export const BookList = ({ searchFilter, category, selected, setSelected }) => {
   const [books, setBooks] = useState([]);
 
-  // useEffect(() => {
-  //   // setSelected("");
-  // }, [category, setSelected]);
-
   useEffect(() => {
     let booksArr = [];
     switch (category) {
